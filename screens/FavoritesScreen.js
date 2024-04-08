@@ -1,13 +1,13 @@
-import { useContext } from "react";
-import { FavoritesContext } from "../store/context/favorites-context";
 import { MEALS } from "../data/dummy-data";
 import MealsList from "../components/MealsList/MealsList";
+import { useSelector } from "react-redux";
 
 function FavoritesScreen() {
-  let { ids } = useContext(FavoritesContext);
-  let favMeals = MEALS.filter((meal) => ids.includes(meal.id));
+  let ids = useSelector((state) => state.favoriteMeals.ids);
 
-  return <MealsList item={favMeals} />;
+  let favMeals = MEALS.filter((meal) => ids.includes(meal.id));
+  console.log("Render");
+  return <MealsList items={favMeals} />;
 }
 
 export default FavoritesScreen;
